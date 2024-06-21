@@ -17,8 +17,8 @@ app.get("/mtbtrails", async (request, response) => {
         response.json(trails);
 
     } catch (error) {
-        console.log(error)
-        response.status(400).send("Generic Error")
+        console.log(error);
+        response.status(400).send("Generic Error");
     };
 });
 
@@ -38,7 +38,7 @@ app.post("/mtbtrails",  async (request, response) => {
         if (error) {
             response.status(400).json(error);
             return;
-        }
+        };
 
         await newMtbTrails.save();
         response.setHeader("Access-Control-Allow-Origin", "*");
@@ -59,7 +59,8 @@ app.delete("/mtbtrails/:id", async (request, response) => {
         if (!isDeleted) {
             response.status(404).send("Could not find trail");
             return;
-        }
+        };
+
         response.status(200).send("Mountain Bike Trail Deleted");
 
     } catch (error) {
@@ -74,7 +75,7 @@ app.get("/mtbtrails/:id", async (request, response) => {
     
     try {
         let getMtbTrail = await model.mtbTrails.findOne({_id: request.params.id});
-        console.log(getMtbTrail)
+        console.log(getMtbTrail);
         if (!getMtbTrail) {
             response.status(404).send("Mountain Bike Trail has not been found.");
             return;
@@ -104,7 +105,7 @@ app.put("/mtbtrails/:id", async (request, response) => {
         if (!putMtbTrail) {
             response.status(404).send("Mountain Bike Trail does not exist");
             return;
-        }
+        };
 
         response.status(204).json(putMtbTrail);
         
@@ -121,6 +122,6 @@ app.put("/mtbtrails/:id", async (request, response) => {
 
 
 app.listen(8080, () => {
-    console.log("Server is running on http://localhost:8080")
+    console.log("Server is running on http://localhost:8080");
 });
 
