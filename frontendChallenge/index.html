@@ -9,6 +9,10 @@
   <body class="container">
     <div id="app">
       <header>
+        <img
+          src="https://cdn2.iconfinder.com/data/icons/wsd-bicycle/512/wsd_bicycle_29-512.png"
+          alt="Mountain bike wheel"
+        />
         <h1 id="title">Mountain Bike Trails</h1>
         <input
           id="search-bar"
@@ -31,6 +35,7 @@
         <button @click="delete_trail(indx)">Delete</button>
         <button @click="edit_trail(indx)">Edit</button>
       </div>
+      <div class="trail-divider table-footer"></div>
 
       <div id="add-container">
         <h2>Add Trail</h2>
@@ -55,8 +60,8 @@
               v-model="add_difficulty_input"
             />
           </label>
-          <button @click="add_trail()">Add New</button>
         </div>
+        <button @click="add_trail()">Add New</button>
       </div>
 
       <footer></footer>
