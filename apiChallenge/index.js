@@ -60,8 +60,7 @@ app.delete("/mtbtrails/:id", async (request, response) => {
             response.status(404).send("Could not find trail");
             return;
         }
-
-        response.status(204).send("Mountain Bike Trail Deleted");
+        response.status(200).send("Mountain Bike Trail Deleted");
 
     } catch (error) {
         console.log(error);
@@ -74,14 +73,14 @@ app.delete("/mtbtrails/:id", async (request, response) => {
 app.get("/mtbtrails/:id", async (request, response) => {
     
     try {
-        let getMtbTrails = await model.mtbTrails.findOne({_id: request.params.id});
-        console.log(getMtbTrails)
-        if (!getMtbTrails) {
+        let getMtbTrail = await model.mtbTrails.findOne({_id: request.params.id});
+        console.log(getMtbTrail)
+        if (!getMtbTrail) {
             response.status(404).send("Mountain Bike Trail has not been found.");
             return;
         };
 
-        response.json(getmtbTrails);
+        response.json(getMtbTrail);
             
 
     } catch (error) {
@@ -94,20 +93,21 @@ app.get("/mtbtrails/:id", async (request, response) => {
 app.put("/mtbtrails/:id", async (request, response) => {
 
     try {
-        const updatedMtbTrails = {
-            description: request.body.description,
-            amount: request.body.amount,
-            category: request.body.category,
+        const updatedMtbTrail = {
+            name: request.body.name,
+            distance: request.body.distance,
+            difficulty: request.body.difficulty,
         };
     
-        let putMtbTrails = await model.mtbTrails.findByIdAndUpdate({_id: request.params.id}, updatedMtbTrails, {new: true,},);
+        let putMtbTrail = await model.mtbTrails.findByIdAndUpdate({_id: request.params.id}, updatedMtbTrail, {new: true,},);
 
-        if (!putMtbTrails) {
+        if (!putMtbTrail) {
             response.status(404).send("Mountain Bike Trail does not exist");
             return;
         }
 
-        response.status(204).json(putMtbTrails);
+        response.status(204).json(putMtbTrail);
+        
 
     } catch (error) {
         console.log(error);
