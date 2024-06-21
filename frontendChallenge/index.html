@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <title>MTB Trails</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  </head>
+  <body class="container">
+    <div id="app">
+      <header>
+        <h1 id="title">Mountain Bike Trails</h1>
+        <input
+          id="search-bar"
+          v-model="search_input"
+          type="text"
+          placeholder="Search..."
+        />
+        <button id="clear-search" @click="clear_search()">x</button>
+      </header>
+
+      <div class="trail-divider table-header">
+        <div>Name</div>
+        <div>Distance</div>
+        <div>Difficulty</div>
+      </div>
+      <div class="trail-divider" v-for="(ex, indx) in filtered_trails">
+        <p>{{ex.name}}</p>
+        <p>{{ex.distance}}</p>
+        <p>{{ex.difficulty}}</p>
+        <button @click="delete_trail(indx)">Delete</button>
+        <button @click="edit_trail(indx)">Edit</button>
+      </div>
+
+      <div id="add-container">
+        <h2>Add Trail</h2>
+        <div id="add-form">
+          <label class="label-input">
+            <span>Name</span>
+            <input type="text" class="form-input" v-model="add_name_input" />
+          </label>
+          <label class="label-input">
+            <span>Distance</span>
+            <input
+              type="number"
+              class="form-input"
+              v-model="add_distance_input"
+            />
+          </label>
+          <label class="label-input">
+            <span>Difficulty</span>
+            <input
+              type="number"
+              class="form-input"
+              v-model="add_difficulty_input"
+            />
+          </label>
+          <button @click="add_trail()">Add New</button>
+        </div>
+      </div>
+
+      <footer></footer>
+
+      <div id="mtmp" v-if="editing">
+        <p>Name</p>
+        <input type="text" v-model="editing_trail.name" />
+        <p>Distance</p>
+        <input type="number" v-model="editing_trail.distance" />
+        <p>Difficulty</p>
+        <input type="number" v-model="editing_trail.difficulty" />
+        <button @click="save_trail()">Save</button>
+      </div>
+      <button @click="editing = false" id="close-edit" v-if="editing">X</button>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
